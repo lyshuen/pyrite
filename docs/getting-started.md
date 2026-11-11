@@ -117,6 +117,49 @@ pyrite kb commit -k my-kb -m "Add first entries"
 
 (`git add` and `git commit` in the KB directory do the same.)
 
+## Share or Publish a Knowledge Base
+
+Your KB is the directory of Markdown files and `kb.yaml`. To share all of it,
+share that directory; the search index is derived and can be rebuilt. For a
+KB in git, commit your changes first, then clone it (or give a collaborator
+the URL of a remote repository). This example clones the local KB:
+
+```bash
+git clone "$HOME/my-kb" "$HOME/my-kb-shared"
+```
+
+For a KB without git, copy its directory instead:
+
+```bash
+cp -R "$HOME/my-kb" "$HOME/my-kb-copy"
+```
+
+To publish a site, export to [Quartz](https://quartz.jzhao.xyz/). The first
+command scaffolds a Quartz project and writes its content; the second updates
+the content of that project after changes to the KB:
+
+```bash
+pyrite export site -k my-kb -o "$HOME/my-site" --init
+```
+
+```bash
+pyrite export site -k my-kb -o "$HOME/my-site"
+```
+
+The export keeps the fields Quartz uses: title, tags, date, aliases (including
+the entry ID), and description. It is a publishing format, not a full-fidelity
+copy of the KB.
+
+For NotebookLM, export a collection or a query of entries. For example, this
+exports the person created above:
+
+```bash
+pyrite export collection "q:type:person" -k my-kb -o "$HOME/notebook-export"
+```
+
+See `pyrite export site --help` and `pyrite export collection --help` for
+filtering, bundling, and other options.
+
 ## Search Your Knowledge Base
 
 **Keyword search** works out of the box:
