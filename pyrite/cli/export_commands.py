@@ -248,6 +248,9 @@ def export_site(
 ):
     """Export an entire KB as a static site.
 
+    Quartz frontmatter keeps title, tags, date, aliases (including the entry ID),
+    and description.
+
     An entry that cannot be loaded is named with its loader's message and left
     out of the export; the command then exits 3 (some exported) or 1 (none).
 
